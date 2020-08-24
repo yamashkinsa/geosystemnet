@@ -14,6 +14,7 @@ def normalize_it(images_path):
 The script performs normalization of extended data imported from MapBox API.
 processed_data_dir - directory for generated data
 z - zoom level of extended data
+"""
 
 
 processed_data_dir = 'generated_files'
