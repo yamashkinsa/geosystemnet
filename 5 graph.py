@@ -1,12 +1,15 @@
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-# gpu or cpu
-# os.environ['CUDA_VISIBLE_DEVICES']='-1'
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy
 from scipy import signal
 import pickle
+
+"""
+5 Graphics Builder
+The script provides graphing for a comparative assessment of the accuracy of trained models
+"""
 
 def movingaverage(interval, window_size):
     window = np.ones(int(window_size))/float(window_size)
@@ -24,7 +27,6 @@ def plot_it(plt, ax, fig, legend_lines, legend_captions, title, ylabel, xlabel, 
     ax.grid(b=True, which='minor', color='silver', linestyle='-', alpha=0.5)
 
 
-
 model_titles = [
     ['deep_fusion_4_june4', 'GeoSystemNet (EuroSAT extended)'],
     ['simple_cnn_june4', 'CNN with 2 layers (EuroSAT)'],
@@ -38,9 +40,6 @@ legend_captions = []
 
 fig1 = plt.figure()
 ax1 = plt.subplot(111)
-
-#fig2 = plt.figure()
-#ax2 = plt.subplot(111)
 
 for mdl in model_titles:
     model_experimental_data = pickle.load(open('models_trained/model_'+mdl[0]+'.data', "rb"))
@@ -68,14 +67,8 @@ for mdl in model_titles:
 
     x = range(1, len(data_instance['history_accuracy'])+1)
 
-    #############
-    #acc_val_mean_data = movingaverage(acc_val_mean_data, 5)
-    #acc_val_std_data = movingaverage(acc_val_std_data, 5)
-
     acc_val_mean_data = scipy.signal.savgol_filter(acc_val_mean_data, 9, 1)
     acc_val_std_data = scipy.signal.savgol_filter(acc_val_std_data, 9, 1)
-
-
 
     k = 1.3
 
@@ -87,15 +80,6 @@ for mdl in model_titles:
     i = i + 1
 
 
-plot_it(plt, ax1, fig1,
-        legend_lines, legend_captions,
-        '',
-        'Accuracy', 'Epoch',
-        0, 100,
-        1, len(data_instance['history_accuracy'])
-        )
-
-
-
+plot_it(plt, ax1, fig1, legend_lines, legend_captions, '', 'Accuracy', 'Epoch', 0, 100, 1, len(data_instance['history_accuracy']))
 plt.show()
 fig1.savefig('accuracy.png')
