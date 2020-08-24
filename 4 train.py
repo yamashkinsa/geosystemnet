@@ -12,38 +12,30 @@ import keras
 import matplotlib.pyplot as plt
 import models_keras
 
-processed_data_dir = '!back/!generated_files'
+"""
+4 Deep Models Training
+The script performs training deep learning models with prepared data.
+processed_data_dir - directory for generated data
+"""
 
-[x8, x12, x14, xHR, y] = pickle.load(open(processed_data_dir+'/hierarchyData.data', "rb"))
-
-test_size = 0.9
-
-x8_train, x8_test, x12_train, x12_test, x14_train, x14_test, xHR_train, xHR_test, y_train, y_test = train_test_split(x8, x12, x14, xHR, y, test_size=test_size)
-
+processed_data_dir = 'generated_files'
 batch_size = 32
-suffix = '_august' #_test10'
+suffix = '_august' 
 num_classes = 10
 epochs = 50 #15
 number_exp = 2 #5
-# loss_function = 'binary_crossentropy' # binary
-loss_function = 'categorical_crossentropy' # multiclass
+loss_function = 'categorical_crossentropy' 
+models = [
+    ['simple_cnn', 0],
+    ['geosystemnet', 1],
+]
+test_size = 0.9
 
+[x8, x12, x14, xHR, y] = pickle.load(open(processed_data_dir+'/hierarchyData.data', "rb"))
+x8_train, x8_test, x12_train, x12_test, x14_train, x14_test, xHR_train, xHR_test, y_train, y_test = train_test_split(x8, x12, x14, xHR, y, test_size=test_size)
 shape_data = x8.shape
-
 img_rows, img_cols, depth = shape_data[1], shape_data[2], shape_data[3]
 input_shape = (img_rows, img_cols, depth)
-
-models = [
-    ['inception_v3', 0],
-       #['googlenet', 0], remove it
-
-    #['vgg16', 0],
-    #['resnet101', 0],
-    #['densenet', 0],
-    #['resnet50', 0],
-    #['simple_cnn', 0],
-    #['geosystemnet', 1],
-]
 
 for modelClass in models:
     model_experimental_data = []
