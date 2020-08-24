@@ -22,8 +22,15 @@ def download_image(src, trg_dir, trg_file):
     handler.write(img_data)
     return True
 
-processed_data_dir = '!back/!generated_files'
-mapbox_token = 'pk.eyJ1IjoieWFtYXNoa2luc2EiLCJhIjoiY2l2N3o1NjEzMDAwZDJ5cHBhMnB6OXdrbiJ9.SKVu_1-oC57cvUPfsZ0cSg'
+"""
+2 Data augmention with MapBox API
+The script performs normalized Sentinel-2 data augmention with MapBox API and export results to a file for further use.
+processed_data_dir - directory for generated data
+mapbox_token - your MapBox token
+"""
+
+processed_data_dir = 'generated_files'
+mapbox_token = 'pk.MAPBOX_TOKEN_HERE'
 
 [xData, yData, train_meta] = pickle.load(open(processed_data_dir+'/data_normalized.data', "rb"))
 
