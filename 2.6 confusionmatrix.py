@@ -10,12 +10,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from keras.utils.np_utils import to_categorical
 
+"""
+6 Confusion Matrix Builder
+The script provides calculating of confusion matrix and metrics for a comparative assessment of the accuracy of trained models
+"""
+
 [x8, x12, x14, xHR, y] = pickle.load(open('!back/!generated_files/hierarchyData.data', "rb"))
 
 test_site = 0.99
 x8_train, x8_test, x12_train, x12_test, x14_train, x14_test, xHR_train, xHR_test, y_train, y_test = train_test_split(x8, x12, x14, xHR, y, test_size=test_site, random_state=42)
 
-model_title = 'resnet_june4'
 model_title = 'InceptionV3__august'
 
 model = keras.models.load_model('models_trained/model_'+model_title+'.h5')
