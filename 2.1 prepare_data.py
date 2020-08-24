@@ -6,8 +6,15 @@ import re
 import pickle
 from sklearn.model_selection import train_test_split
 
+"""
+2.1 Data preparation
+The script performs preliminary processing of ERS data from the Sentinel-2 satellite: normalization and export to a file for further use.
+sentinel_source_dir - geotiff image storage path 
+processed_data_dir - directory for generated data
+"""
+
 sentinel_source_dir = 'sentinel_source/sentinel-tif'
-processed_data_dir = '!back/!generated_files'
+processed_data_dir = '/generated_files'
 
 train_x = []
 train_y = []
@@ -44,8 +51,6 @@ for root, dirs, files in os.walk(sentinel_source_dir):
         class_i = class_i + 1
 
 pickle.dump([train_x, train_y, train_meta], open(processed_data_dir+'/data_not_normalized.data', 'wb'))
-
-chanel_number = 13
 
 x = np.array(train_x).astype(float)
 y = np.array(train_y)
