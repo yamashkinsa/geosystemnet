@@ -1,5 +1,7 @@
 # GeoSystemNet
 
+### 1 GeoSystemNet Code
+The GeoSystemnet deep model code is located in **geosystemnet/models_keras/geosystemnet.py**
 
 ### 2 Helper scripts
 This section provides a list of auxiliary scripts that allow you to prepare Sentinel-2 data for analysis, train deep neural network models, evaluate their accuracy by building diagrams, calculating error matrices and metrics based on them.
